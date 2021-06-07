@@ -1,19 +1,35 @@
-# This is the title
+# Review: Attention is All you Need
 
 Here's the table of contents:
 
 1. TOC
 {:toc}
 
-## Basic setup
+## WHy?
+To computer representations of input and output - first of a kind attempt where a model relies entirely on self-attention wihtout using sequence-aligned RNN's or convolutions.
+To enable more parallelization and less time to train with superior performance. 
 
-Jekyll requires blog post files to be named according to the following format:
+## How?
+Using self attention mechanism.
+Most neural translation models follow encoder decoder scheme.
+Transformers follow the same architecture using stacked self-attention and point wise fully connected layers for encoder and decoder.
 
-`YEAR-MONTH-DAY-filename.md`
+- Encoder 
+	Stack of 6 identical layers.
+	each layer has 2 sub layers -  a) Multi head self attention mechanism
+				 	b) Position wise fully connected feed forward network
+	output of each sub layer is LayerNorm(x + sublayer(x))
+	output dimension of each layer is 512 to facilitate residual connections
 
-Where `YEAR` is a four-digit number, `MONTH` and `DAY` are both two-digit numbers, and `filename` is whatever file name you choose, to remind yourself what this post is about. `.md` is the file extension for markdown files.
-
-The first line of the file should start with a single hash character, then a space, then your title. This is how you create a "*level 1 heading*" in markdown. Then you can create level 2, 3, etc headings as you wish but repeating the hash character, such as you see in the line `## File names` above.
+- Decode 
+	Also consists of 6 identical layers
+	It has 3 sub layers, an extra multi head attention layer for output of encoder stack
+	have residual connections for sublayers and layer normalizations as encoder
+	masking* ensures that predictions for position i depend only on known outputs at position less than i
+	
+- Attention 
+	
+	
 
 ## Basic formatting
 
